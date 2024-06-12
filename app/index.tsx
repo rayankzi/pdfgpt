@@ -12,19 +12,19 @@ export default function Index() {
         <View className='space-y-4'>
           <View className='space-y-3'>
             <Text
-              className='text-[56px] text-white tracking-wide font-heading'
+              className='text-[56px] text-white tracking-wide font-primary'
               style={{ lineHeight: 70 }}
             >
               Chat with
             </Text>
             <Text
-              className='text-[56px] text-white tracking-wide font-heading'
+              className='text-[56px] text-white tracking-wide font-primary'
               style={{ lineHeight: 70 }}
             >
               your PDF
             </Text>
             <Text
-              className='text-[56px] text-white tracking-wide font-heading-bold'
+              className='text-[56px] text-white tracking-wide font-primary-bold'
               style={{ lineHeight: 70 }}
             >
               in seconds
