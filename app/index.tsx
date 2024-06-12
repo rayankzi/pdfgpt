@@ -31,7 +31,7 @@ export default function Index() {
             </Text>
           </View>
 
-          <Text className='text-[#B9C1BE] leading-6 '>
+          <Text className='text-[#B9C1BE] leading-6 font-secondary'>
             PDFGPT allows you to have conversations with any PDF document.
             Simply upload your file and start asking!
           </Text>
@@ -43,18 +43,21 @@ export default function Index() {
               className='bg-white rounded-full flex-1 py-3 shadow-md'
               onPress={() => router.push('/sign-up')}
             >
-              <Text className='text-black text-lg font-semibold text-center'>
+              <Text className='text-black text-lg font-primary-semibold text-center'>
                 Sign Up
               </Text>
             </TouchableOpacity>
           </View>
 
           <View className='flex-row gap-1.5 justify-center pb-6'>
-            <Text className='text-[#B9C1BE] text-center'>
+            <Text className='text-[#B9C1BE] text-center font-secondary'>
               Existing Account?
             </Text>
 
-            <Link href='/sign-in' className='text-white font-semibold'>
+            <Link
+              href='/sign-in'
+              className='text-white font-secondary-semibold'
+            >
               Log In
             </Link>
           </View>
