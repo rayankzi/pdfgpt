@@ -11,14 +11,27 @@ export default function Index() {
 
         <View className='space-y-4'>
           <View className='space-y-3'>
-            <Text className='text-6xl text-white tracking-wide'>Chat with</Text>
-            <Text className='text-6xl text-white tracking-wide'>your PDF</Text>
-            <Text className='text-6xl text-white tracking-wide font-bold'>
+            <Text
+              className='text-[56px] text-white tracking-wide font-primary'
+              style={{ lineHeight: 70 }}
+            >
+              Chat with
+            </Text>
+            <Text
+              className='text-[56px] text-white tracking-wide font-primary'
+              style={{ lineHeight: 70 }}
+            >
+              your PDF
+            </Text>
+            <Text
+              className='text-[56px] text-white tracking-wide font-primary-bold'
+              style={{ lineHeight: 70 }}
+            >
               in seconds
             </Text>
           </View>
 
-          <Text className='text-[#B9C1BE] leading-6'>
+          <Text className='text-[#B9C1BE] leading-6 '>
             PDFGPT allows you to have conversations with any PDF document.
             Simply upload your file and start asking!
           </Text>
