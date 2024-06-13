@@ -14,15 +14,11 @@ export default function RootLayout() {
     'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf'),
     'Poppins-SemiBold': require('../assets/fonts/Poppins-SemiBold.ttf'),
     'Poppins-Thin': require('../assets/fonts/Poppins-Thin.ttf'),
-    'Montserrat-Black': require('../assets/fonts/Montserrat-Black.ttf'),
-    'Montserrat-Bold': require('../assets/fonts/Montserrat-Bold.ttf'),
-    'Montserrat-ExtraBold': require('../assets/fonts/Montserrat-ExtraBold.ttf'),
-    'Montserrat-ExtraLight': require('../assets/fonts/Montserrat-ExtraLight.ttf'),
-    'Montserrat-Light': require('../assets/fonts/Montserrat-Light.ttf'),
-    'Montserrat-Medium': require('../assets/fonts/Montserrat-Medium.ttf'),
-    'Montserrat-Regular': require('../assets/fonts/Montserrat-Regular.ttf'),
-    'Montserrat-SemiBold': require('../assets/fonts/Montserrat-SemiBold.ttf'),
-    'Montserrat-Thin': require('../assets/fonts/Montserrat-Thin.ttf'),
+    'Lato-Black': require('../assets/fonts/Lato-Black.ttf'),
+    'Lato-Bold': require('../assets/fonts/Lato-Bold.ttf'),
+    'Lato-Light': require('../assets/fonts/Lato-Light.ttf'),
+    'Lato-Regular': require('../assets/fonts/Lato-Regular.ttf'),
+    'Lato-Thin': require('../assets/fonts/Lato-Thin.ttf'),
   })
 
   useEffect(() => {
