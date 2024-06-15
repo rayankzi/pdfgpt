@@ -4,16 +4,44 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
+  Alert,
+  ActivityIndicator,
 } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import FormField from '@/components/FormField'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { z } from 'zod'
+
+const formSchema = z.object({
+  name: z.string().min(2).max(100),
+  email: z.string().min(2).email(),
+  password: z.string().min(2),
+})
 
 const SignUp = () => {
+  const [formData, setFormData] = useState<z.infer<typeof formSchema>>({
+    name: '',
+    email: '',
+    password: '',
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const onSubmit = () => {
+    setIsSubmitting(true)
+
+    try {
+      const correctData = formSchema.parse(formData)
+    } catch (err) {
+      Alert.alert('Error', 'Something went wrong')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <SafeAreaView className='bg-gray-100 h-full'>
       <ScrollView>
-        <View className='w-full justify-center px-4 my-6 pt-10 space-y-32'>
+        <View className='w-full justify-center px-4 my-6 pt-1'>
           <View>
             <View className='space-y-4 px-5'>
               <Text className='text-center font-primary-bold text-lg'>
@@ -29,31 +57,56 @@ const SignUp = () => {
             <KeyboardAwareScrollView className='mt-4'>
               <View className='px-2'>
                 <FormField
-                  title='Username'
-                  placeholder='Username'
+                  title='Your name'
+                  value={formData.name}
+                  handleTextChange={(text) =>
+                    setFormData({ ...formData, name: text })
+                  }
                   otherStyles='mt-10'
                 />
 
                 <FormField
-                  title='Username'
-                  placeholder='Username'
-                  otherStyles='mt-10'
+                  title='Your email'
+                  value={formData.email}
+                  handleTextChange={(text) =>
+                    setFormData({ ...formData, email: text })
+                  }
+                  otherStyles='mt-7'
+                  keyboardType='email-address'
                 />
 
                 <FormField
-                  title='Username'
-                  placeholder='Username'
-                  otherStyles='mt-10'
+                  title='Your password'
+                  value={formData.password}
+                  handleTextChange={(text) =>
+                    setFormData({ ...formData, password: text })
+                  }
+                  otherStyles='mt-7'
                 />
               </View>
             </KeyboardAwareScrollView>
           </View>
 
-          <View className='flex-row'>
-            <TouchableOpacity className='bg-[#24786D] rounded-full flex-1 py-3'>
+          <View className='flex-row mt-32'>
+            <TouchableOpacity
+              onPress={onSubmit}
+              disabled={isSubmitting}
+              className={`bg-[#24786D] rounded-full flex-1 py-3 flex flex-row justify-center ${
+                isSubmitting && 'opacity-50'
+              }`}
+            >
               <Text className='text-white text-lg font-primary-semibold text-center'>
                 Create an Account
               </Text>
+
+              {isSubmitting && (
+                <ActivityIndicator
+                  animating={isSubmitting}
+                  color='#fff'
+                  size='small'
+                  className='ml-2'
+                />
+              )}
             </TouchableOpacity>
           </View>
         </View>

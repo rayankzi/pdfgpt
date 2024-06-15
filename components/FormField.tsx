@@ -11,9 +11,8 @@ import { icons } from '@/constants'
 
 interface FormFieldProps {
   title: string
-  value?: string
-  placeholder: string
-  handleTextChange?: (...event: any[]) => void
+  value: string
+  handleTextChange: (text: string) => void
   otherStyles: string
   keyboardType?: KeyboardTypeOptions
 }
@@ -25,29 +24,32 @@ const FormField = ({ title, otherStyles, keyboardType }: FormFieldProps) => {
   return (
     <View className={` ${otherStyles}`}>
       <Text className='text-base text-[#24786D] font-secondary-bold'>
-        Your Name
+        {title}
       </Text>
 
-      <View className='w-full h-16 border-b border-[#CDD1D0] flex flex-row items-center'>
+      <View className='relative w-full h-16 border-b border-[#CDD1D0] flex flex-row items-center'>
         <TextInput
           className='flex-1 text-black font-secondary font-semibold text-base'
           value={value}
-          placeholderTextColor='black'
           onChangeText={(e) => setValue(e)}
-          secureTextEntry={title === 'Password' && !showPassword}
+          secureTextEntry={title === 'Your password' && !showPassword}
           keyboardType={keyboardType}
         />
 
-        {title === 'Password' && (
+        {title === 'Your password' && (
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
             <Image
               source={!showPassword ? icons.eye : icons.eyeHide}
-              className='h-6 w-6'
+              className='mt-3 h-6 w-6'
               resizeMode='contain'
             />
           </TouchableOpacity>
         )}
       </View>
+
+      <Text className='text-transparent text-right mt-2 text-[10px]'>
+        Invalid Email Address
+      </Text>
     </View>
   )
 }
