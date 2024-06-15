@@ -4,17 +4,16 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
-  Alert,
   ActivityIndicator,
 } from 'react-native'
 import React, { useState } from 'react'
 import FormField from '@/components/FormField'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { z } from 'zod'
+import { ZodError, ZodIssue, z } from 'zod'
 
 const formSchema = z.object({
   name: z.string().min(2).max(100),
-  email: z.string().min(2).email(),
+  email: z.string().email(),
   password: z.string().min(2),
 })
 
@@ -24,6 +23,7 @@ const SignUp = () => {
     email: '',
     password: '',
   })
+  const [errors, setErrors] = useState<ZodIssue[]>([])
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const onSubmit = () => {
@@ -31,8 +31,15 @@ const SignUp = () => {
 
     try {
       const correctData = formSchema.parse(formData)
+      setErrors([])
+
+      // logic
     } catch (err) {
-      Alert.alert('Error', 'Something went wrong')
+      console.log('h')
+      if (err instanceof ZodError) {
+        console.log(err.issues)
+        setErrors(err.issues)
+      }
     } finally {
       setIsSubmitting(false)
     }
@@ -63,6 +70,7 @@ const SignUp = () => {
                     setFormData({ ...formData, name: text })
                   }
                   otherStyles='mt-10'
+                  errors={errors}
                 />
 
                 <FormField
@@ -73,6 +81,7 @@ const SignUp = () => {
                   }
                   otherStyles='mt-7'
                   keyboardType='email-address'
+                  errors={errors}
                 />
 
                 <FormField
@@ -82,6 +91,7 @@ const SignUp = () => {
                     setFormData({ ...formData, password: text })
                   }
                   otherStyles='mt-7'
+                  errors={errors}
                 />
               </View>
             </KeyboardAwareScrollView>
