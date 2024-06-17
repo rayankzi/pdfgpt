@@ -2,6 +2,7 @@ import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
 import { Stack } from 'expo-router'
+import { GlobalProvider } from '@/contexts/GlobalContext'
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
@@ -31,10 +32,12 @@ export default function RootLayout() {
   if (!loaded && !error) return null
 
   return (
-    <Stack>
-      <Stack.Screen name='index' options={{ headerShown: false }} />
-      <Stack.Screen name='(auth)' options={{ headerShown: false }} />
-      <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-    </Stack>
+    <GlobalProvider user={null} loading={true} isLoggedIn={false}>
+      <Stack>
+        <Stack.Screen name='index' options={{ headerShown: false }} />
+        <Stack.Screen name='(auth)' options={{ headerShown: false }} />
+        <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+      </Stack>
+    </GlobalProvider>
   )
 }

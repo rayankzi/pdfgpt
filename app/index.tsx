@@ -1,8 +1,13 @@
-import { Link, router } from 'expo-router'
+import { useGlobalContext } from '@/contexts/GlobalContext'
+import { Link, Redirect, router } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native'
 
 export default function Index() {
+  const loading = useGlobalContext((s) => s.loading)
+  const isLoggedIn = useGlobalContext((s) => s.isLoggedIn)
+
+  if (!loading && isLoggedIn) return <Redirect href='/home' />
   return (
     // TODO: change background to gradient
     <SafeAreaView className='bg-[#21162b] h-full'>
