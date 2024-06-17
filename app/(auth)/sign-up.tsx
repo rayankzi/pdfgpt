@@ -10,6 +10,8 @@ import React, { useState } from 'react'
 import FormField from '@/components/FormField'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { ZodError, ZodIssue, z } from 'zod'
+import { router } from 'expo-router'
+import { createUser } from '@/lib/appwrite'
 
 const formSchema = z.object({
   name: z.string().min(2).max(100),
@@ -26,7 +28,7 @@ const SignUp = () => {
   const [errors, setErrors] = useState<ZodIssue[]>([])
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     setIsSubmitting(true)
 
     try {
@@ -34,8 +36,13 @@ const SignUp = () => {
       setErrors([])
 
       // logic
+      const result = await createUser(
+        correctData.email,
+        correctData.password,
+        correctData.name
+      )
+      router.push('/home')
     } catch (err) {
-      console.log('h')
       if (err instanceof ZodError) {
         console.log(err.issues)
         setErrors(err.issues)

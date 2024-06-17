@@ -10,6 +10,7 @@ import {
 import React, { useState } from 'react'
 import FormField from '@/components/FormField'
 import { ZodError, ZodIssue, z } from 'zod'
+import { signIn } from '@/lib/appwrite'
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -24,7 +25,7 @@ const SignIn = () => {
   const [errors, setErrors] = useState<ZodIssue[]>([])
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     setIsSubmitting(true)
 
     try {
@@ -32,7 +33,7 @@ const SignIn = () => {
       setErrors([])
 
       // Handle successful form submission (e.g., send data to the server)
-      Alert.alert('Success', 'Logged in successfully!')
+      const result = await signIn(correctData.email, correctData.password)
     } catch (err) {
       if (err instanceof ZodError) {
         setErrors(err.issues)
